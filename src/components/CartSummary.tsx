@@ -107,7 +107,28 @@ const CartSummaryComponent = function CartSummary({
         <button
           type="button"
           disabled={cartItems.length === 0}
-          className="mt-3 w-full rounded-xl bg-primary-600 px-3 py-2 text-xs font-semibold text-slate-900 shadow-sm transition hover:bg-primary-700 cursor-pointer disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500"
+          className="
+            mt-3 w-full rounded-xl
+            bg-primary-600
+            px-3 py-2
+            text-xs font-semibold text-slate-900
+            shadow-sm
+            transition-all duration-200 ease-out
+            hover:bg-primary-700
+            hover:shadow-md
+            active:translate-y-0
+            active:shadow-sm
+            focus:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-primary-400
+            focus-visible:ring-offset-2
+            disabled:cursor-not-allowed
+            disabled:bg-slate-300
+            disabled:text-slate-500
+            disabled:shadow-none
+            disabled:transform-none
+            cursor-pointer
+            "
         >
           Place order
         </button>

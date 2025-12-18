@@ -117,7 +117,7 @@ const ProductListComponent = function ProductList({
                 type="button"
                 disabled={disabled || safeQty >= 99}
                 onClick={() => onChangeQuantity(product.id, (safeQty || 0) + 1)}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-600 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-primary-700 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-sm font-semibold text-slate-700 transition hover:bg-slate-100 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
               >
                 +
               </button>
