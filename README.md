@@ -10,6 +10,10 @@ npm run build
 npm run preview
 ```
 
+## Demo
+
+Live demo: [`https://buymed-test.vercel.app/`](https://buymed-test.vercel.app/)
+
 ## Approach
 
 - **Data in-code**: 4 sample products from the spec, typed via `Product`.
@@ -38,9 +42,3 @@ src/
 ├── App.tsx                # Page shell, state, layout
 └── main.tsx               # Entry, wraps with ErrorBoundary
 ```
-
-## Notes for reviewer
-
-- Tailwind v4 syntax in `index.css` (`@import "tailwindcss"`).
-- Disabled states are explicit on qty controls and “Place order”; loading bar appears when clicking “Simulate API loading.”
-- Cart total is pinned to the bottom of the card (flex + `mt-auto`); quantity input allows empty before typing a new number; cart badge uses an icon.
