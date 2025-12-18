@@ -71,11 +71,11 @@ const CartSummaryComponent = function CartSummary({
       </p>
 
       {cartItems.length === 0 ? (
-        <div className="mt-4 rounded-xl border border-dashed border-slate-200 bg-slate-50 px-3 py-4 text-xs text-slate-500">
+        <div className="my-4 rounded-xl border border-dashed border-slate-200 bg-slate-50 px-3 py-4 text-xs text-slate-500">
           No items in cart. Adjust quantities from the product list.
         </div>
       ) : (
-        <div className="mt-3 flex-1 space-y-2 overflow-y-auto pr-1">
+        <div className="my-3 flex-1 space-y-2 overflow-y-auto pr-1">
           {cartItems.map((item) => (
             <div
               key={item.id}
