@@ -7,7 +7,6 @@ import React, {
   useState,
 } from "react";
 import "./index.css";
-import { formatCurrency } from "./utils/formatCurrency";
 import type { CartItem, Product } from "./types";
 
 const Filters = React.lazy(() => import("./components/Filters"));
@@ -52,7 +51,6 @@ function App(): JSX.Element {
   const [category, setCategory] = useState<string>("all");
   const [quantities, setQuantities] = useState<QuantitiesState>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [showMobileCart, setShowMobileCart] = useState<boolean>(false);
 
   const handleQuantityChange = useCallback(
     (productId: number, rawValue: string | number) => {
@@ -141,32 +139,6 @@ function App(): JSX.Element {
               Quickly search medicines and build an order.
             </p>
           </div>
-
-          <button
-            type="button"
-            className="relative flex items-center gap-2 rounded-full bg-primary-600 px-3 py-1.5 text-xs font-medium text-slate-900 shadow-sm transition hover:bg-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 sm:hidden cursor-pointer"
-            onClick={() => setShowMobileCart((prev) => !prev)}
-          >
-            <span>Cart</span>
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[10px] font-semibold">
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                className="h-3.5 w-3.5 text-slate-900"
-              >
-                <path
-                  d="M3 4h2l1.5 11h11L19 8H7"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <circle cx="10" cy="19" r="1" fill="currentColor" />
-                <circle cx="16" cy="19" r="1" fill="currentColor" />
-              </svg>
-            </span>
-          </button>
         </header>
 
         <Suspense
@@ -230,48 +202,21 @@ function App(): JSX.Element {
           </main>
         </Suspense>
 
-        <section
-          className={`mt-2 border-t border-slate-200 bg-white/90 pb-2 pt-3 shadow-[0_-10px_30px_rgba(15,23,42,0.08)] backdrop-blur sm:rounded-2xl sm:border sm:bg-white sm:p-4 lg:hidden ${
-            showMobileCart ? "" : "sm:max-h-17.5"
-          }`}
-        >
-          <div className="flex items-center justify-between gap-2 px-2 sm:px-0">
-            <div>
-              <p className="text-xs font-medium text-slate-500">
-                Order summary
-              </p>
-              <p className="text-sm font-semibold text-slate-900">
-                {formatCurrency(grandTotal)}{" "}
-                <span className="text-xs font-normal text-slate-500">
-                  ({totalItems} item{totalItems !== 1 ? "s" : ""})
-                </span>
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setShowMobileCart((prev) => !prev)}
-              className="rounded-full bg-primary-600 px-3 py-1.5 text-xs font-medium text-slate-900 shadow-sm hover:bg-primary-700 transition cursor-pointer"
+        <section className="mt-2 border-t border-slate-200 bg-white/90 pb-2 pt-3 shadow-[0_-10px_30px_rgba(15,23,42,0.08)] backdrop-blur rounded-2xl sm:border sm:bg-white sm:p-4 lg:hidden">
+          <div className="mt-3 space-y-2 px-2 sm:px-0">
+            <Suspense
+              fallback={
+                <div className="h-32 rounded-2xl bg-slate-100 shadow-soft" />
+              }
             >
-              {showMobileCart ? "Hide details" : "View details"}
-            </button>
+              <CartSummary
+                cartItems={cartItems}
+                grandTotal={grandTotal}
+                compact
+                isLoading={isLoading}
+              />
+            </Suspense>
           </div>
-
-          {showMobileCart && (
-            <div className="mt-3 max-h-60 space-y-2 overflow-y-auto px-2 sm:px-0">
-              <Suspense
-                fallback={
-                  <div className="h-32 rounded-2xl bg-slate-100 shadow-soft" />
-                }
-              >
-                <CartSummary
-                  cartItems={cartItems}
-                  grandTotal={grandTotal}
-                  compact
-                  isLoading={isLoading}
-                />
-              </Suspense>
-            </div>
-          )}
         </section>
       </div>
     </div>
